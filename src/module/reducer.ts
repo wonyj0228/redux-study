@@ -1,4 +1,11 @@
-import { ADD_TODO, DELETE_TODO, TodoAction } from "./actions";
+import { createReducer } from '@reduxjs/toolkit';
+import {
+  ADD_TODO,
+  addAction2,
+  DELETE_TODO,
+  dltAction2,
+  TodoAction,
+} from './actions';
 
 export interface ITodo {
   id: string;
@@ -18,3 +25,16 @@ export const reducer = (state: ITodo[] = [], action: TodoAction) => {
       break;
   }
 };
+
+/**
+ * Redux Toolkit
+ */
+
+export const reducer2 = createReducer<ITodo[]>([], (builder) => {
+  builder.addCase(addAction2, (state, action) => {
+    state.unshift({ id: action.payload.id, text: action.payload.text });
+  });
+  builder.addCase(dltAction2, (state, action) =>
+    state.filter((todo) => todo.id !== action.payload)
+  );
+});

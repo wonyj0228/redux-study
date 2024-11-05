@@ -1,12 +1,12 @@
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
-import { ITodo } from "../module/reducer";
-import { useDispatch } from "react-redux";
-import { addAction } from "../module/actions";
-import Todo from "../components/Todo";
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ITodo } from '../module/reducer';
+import { useDispatch } from 'react-redux';
+import { addAction, addAction2 } from '../module/actions';
+import Todo from '../components/Todo';
 
 function Home() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const todoState = useSelector((state: ITodo[]) => state);
   const dispatch = useDispatch();
 
@@ -15,8 +15,9 @@ function Home() {
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addAction(String(Date.now()), text));
-    setText("");
+    // dispatch(addAction(String(Date.now()), text));
+    dispatch(addAction2(String(Date.now()), text));
+    setText('');
   };
 
   return (
