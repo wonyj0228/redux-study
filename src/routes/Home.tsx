@@ -4,11 +4,13 @@ import { ITodo } from '../module/reducer';
 import { useDispatch } from 'react-redux';
 import { addAction, addAction2 } from '../module/actions';
 import Todo from '../components/Todo';
+import { add, toDos } from '../module/slice';
+import { AppDispatch, RootState } from '..';
 
 function Home() {
   const [text, setText] = useState('');
-  const todoState = useSelector((state: ITodo[]) => state);
-  const dispatch = useDispatch();
+  const todoState = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -16,7 +18,8 @@ function Home() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // dispatch(addAction(String(Date.now()), text));
-    dispatch(addAction2(String(Date.now()), text));
+    // dispatch(addAction2(String(Date.now()), text));
+    dispatch(add({ id: String(Date.now()), text }));
     setText('');
   };
 
